@@ -7,9 +7,7 @@ import * as PostController from "./controllers/PostController.js";
 import multer from 'multer';
 import cors from 'cors';
 
-mongoose.connect(
-    'mongodb+srv://martyniukvaa:tAYGUFhmfEFem3eu@cluster0.fnzmk7g.mongodb.net/mern-app-v1?retryWrites=true&w=majority'
-)
+mongoose.connect(process.env.MONGO_DB_CONNECT_LINK)
     .then(() => console.log('Mongo Database connected'))
     .catch((err)=>console.log('Mongo Database has an error while connecting', err))
 
@@ -56,7 +54,7 @@ app.patch('/posts/:id' ,checkAuth, PostController.update);
 //TAGS API
 app.get('/tags', PostController.getTags);
 
-app.listen(4444, (err) => {
+app.listen(process.env.PORT || 4444, (err) => {
     if (err) {
         return console.log(err);
     }
